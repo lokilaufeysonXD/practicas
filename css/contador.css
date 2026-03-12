@@ -1,0 +1,11 @@
+.limite {
+    color: green;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.limite:active {
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}
