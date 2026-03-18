@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Es un palíndromo?</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 40px 30px;
+            max-width: 500px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+            margin-bottom: 25px;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .result-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .result-card.palindrome {
+            border-color: #38a169;
+            background: #f0fff4;
+        }
+
+        .result-card.not-palindrome {
+            border-color: #e53e3e;
+            background: #fff5f5;
+        }
+
+        .result-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .result-message {
+            color: #4a5568;
+            font-size: 1.1rem;
+        }
+
+        .example {
+            margin-top: 20px;
+            color: #718096;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .example span {
+            color: #667eea;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1> ¿Es un palíndromo?</h1>
+        <div class="subtitle">Ingresa una palabra o frase y descúbrelo</div>
+
+        <div class="input-group">
+            <label for="textInput">Texto a evaluar</label>
+            <input type="text" id="textInput" placeholder="Ej: anita lava la tina" autofocus>
+        </div>
+
+        <button id="checkBtn">Comprobar</button>
+
+        <div id="resultCard" class="result-card">
+            <div id="resultText" class="result-text"></div>
+            <div id="resultMessage" class="result-message">Esperando tu texto...</div>
+        </div>
+
+        <div class="example">
+            💡 Prueba con: <span id="example1">Anita lava la tina</span> | <span id="example2">Hola mundo</span>
+        </div>
+    </div>
+
+    <script>
+        // Función para limpiar el texto (eliminar acentos, espacios, signos de puntuación y pasar a minúsculas)
+        function cleanText(text) {
+            // Eliminar acentos y diacríticos
+            const withoutAccents = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            // Eliminar caracteres no alfanuméricos (excepto letras y números)
+            const alphanumeric = withoutAccents.toLowerCase().replace(/[^a-z0-9]/g, "");
+            return alphanumeric;
+        }
+
+        // Función para verificar si es palíndromo
+        function isPalindrome(text) {
+            const cleaned = cleanText(text);
+            if (cleaned.length === 0) return false; // Texto vacío no es palíndromo
+            const reversed = cleaned.split('').reverse().join('');
+            return cleaned === reversed;
+        }
+
+        // Elementos del DOM
+        const textInput = document.getElementById('textInput');
+        const checkBtn = document.getElementById('checkBtn');
+        const resultCard = document.getElementById('resultCard');
+        const resultText = document.getElementById('resultText');
+        const resultMessage = document.getElementById('resultMessage');
+        const example1 = document.getElementById('example1');
+        const example2 = document.getElementById('example2');
+
+        // Función para actualizar el resultado en la UI
+        function updateResult(text) {
+            const palindrome = isPalindrome(text);
+            if (text.trim() === '') {
+                // Caso vacío
+                resultCard.className = 'result-card';
+                resultMessage.textContent = 'Introduce algún texto';
+            } else if (palindrome) {
+                resultCard.className = 'result-card palindrome';
+                resultText.textContent = '✅ ¡Sí!';
+                resultMessage.textContent = `"${text}" es un palíndromo`;
+            } else {
+                resultCard.className = 'result-card not-palindrome';
+                resultText.textContent = '❌ No';
+                resultMessage.textContent = `"${text}" no es un palíndromo`;
+            }
+        }
+
+        // Evento al hacer clic en el botón
+        checkBtn.addEventListener('click', () => {
+            updateResult(textInput.value);
+        });
+
+        // Evento al presionar Enter en el campo de texto
+        textInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                checkBtn.click();
+            }
+        });
+
+        // Ejemplos interactivos
+        example1.addEventListener('click', () => {
+            textInput.value = 'Anita lava la tina';
+            checkBtn.click();
+        });
+
+        example2.addEventListener('click', () => {
+            textInput.value = 'Hola mundo';
+            checkBtn.click();
+        });
+
+        // Opcional: comprobar al cargar con el texto por defecto (vacío)
+        updateResult('');
+    </script>
+</body>
+</html>

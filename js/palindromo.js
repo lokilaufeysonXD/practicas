@@ -1,64 +1,69 @@
-function esPalindromo() {
-    let inputElemento = document.getElementById("palindromo");
-    let textoIngresado = inputElemento.value.trim();
+       // Función para limpiar el texto (eliminar acentos, espacios, signos de puntuación y pasar a minúsculas)
+        function cleanText(text) {
+            // Eliminar acentos y diacríticos
+            const withoutAccents = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            // Eliminar caracteres no alfanuméricos (excepto letras y números)
+            const alphanumeric = withoutAccents.toLowerCase().replace(/[^a-z0-9]/g, "");
+            return alphanumeric;
+        }
 
-    if (textoIngresado === "") {
-        document.getElementById("caja-flotante").style.display = "none";
-        document.getElementById("resultado").innerHTML = ""; // Limpiamos el texto principal
-        return;
-    }
+        // Función para verificar si es palíndromo
+        function isPalindrome(text) {
+            const cleaned = cleanText(text);
+            if (cleaned.length === 0) return false; // Texto vacío no es palíndromo
+            const reversed = cleaned.split('').reverse().join('');
+            return cleaned === reversed;
+        }
 
-    console.log(textoIngresado);
+        // Elementos del DOM
+        const textInput = document.getElementById('textInput');
+        const checkBtn = document.getElementById('checkBtn');
+        const resultCard = document.getElementById('resultCard');
+        const resultText = document.getElementById('resultText');
+        const resultMessage = document.getElementById('resultMessage');
+        const example1 = document.getElementById('example1');
+        const example2 = document.getElementById('example2');
 
-    let arrayDeLetras = textoIngresado.split("");
+        // Función para actualizar el resultado en la UI
+        function updateResult(text) {
+            const palindrome = isPalindrome(text);
+            if (text.trim() === '') {
+                // Caso vacío
+                resultCard.className = 'result-card';
+                resultMessage.textContent = 'Introduce algún texto';
+            } else if (palindrome) {
+                resultCard.className = 'result-card palindrome';
+                resultText.textContent = '✅ ¡Sí!';
+                resultMessage.textContent = `"${text}" es un palíndromo`;
+            } else {
+                resultCard.className = 'result-card not-palindrome';
+                resultText.textContent = '❌ No';
+                resultMessage.textContent = `"${text}" no es un palíndromo`;
+            }
+        }
 
-    console.log(arrayDeLetras);
+        // Evento al hacer clic en el botón
+        checkBtn.addEventListener('click', () => {
+            updateResult(textInput.value);
+        });
 
-    let textoInvertido = arrayDeLetras.reverse().join("");
-
-    console.log(textoInvertido);
-
-    if (textoIngresado === textoInvertido) {
-        console.log("Es un palindromo");
-        document.getElementById("resultado-flotante").innerHTML = "¡Sí! Es un palíndromo.";
-
-        let resultadoElemento = document.getElementById("resultado");
-        resultadoElemento.innerHTML = "¡Sí! Es un palíndromo.";
-        resultadoElemento.style.color = "green"; // Cambiar a verde
-
-    } else {
-        console.log("No es un palindromo");
-        document.getElementById("resultado-flotante").innerHTML = "No es un palíndromo.";
-
-        let resultadoElemento = document.getElementById("resultado");
-        resultadoElemento.innerHTML = "No es un palíndromo.";
-        resultadoElemento.style.color = "red"; // Cambia a rojo
-    }
-
-
-    let cajaFlotante = document.getElementById("caja-flotante");
-    cajaFlotante.style.display = "block";
-
-    setTimeout(function () {
-        cajaFlotante.style.display = "none";
-    }, 3000);
-}
-
-
-//////////////////// esto si quieres lo dejas es complicado lo tuve que buscar porque no me recordaba ////////////////////////
-
-// Detectar cuando se presiona la tecla "Enter" en el input
-// Esperamos a que todo el HTML cargue primero antes de buscar el elemento
-document.addEventListener("DOMContentLoaded", function () {
-    let inputPalindromo = document.getElementById("palindromo");
-
-    // Verificamos que el input exista antes de agregarle el evento
-    if (inputPalindromo) {
-        inputPalindromo.addEventListener("keypress", function (event) {
-            if (event.key === "Enter") {
-                event.preventDefault(); // Evita recargar
-                esPalindromo(); // Ejecuta la revisión
+        // Evento al presionar Enter en el campo de texto
+        textInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                checkBtn.click();
             }
         });
-    }
-});
+
+        // Ejemplos interactivos
+        example1.addEventListener('click', () => {
+            textInput.value = 'Anita lava la tina';
+            checkBtn.click();
+        });
+
+        example2.addEventListener('click', () => {
+            textInput.value = 'Hola mundo';
+            checkBtn.click();
+        });
+
+        // Opcional: comprobar al cargar con el texto por defecto (vacío)
+        updateResult('');

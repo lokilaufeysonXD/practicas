@@ -10,12 +10,68 @@
 </head>
 
 <body>
-    <h1>Contador</h1>
-    <p>Contador: <span id="contador">0</span></p>
-    <button id="incrementar" onclick="incrementar()">+ Incrementar</button>
-    <button id="decrementar" onclick="decrementar()">- Decrementar</button>
-    <button id="resetear" onclick="resetear()">Resetear</button>
-    <button class="limite" id="limitar" onclick="limitar()">Limitar a 10</button>
+    <nav class="navbar">
+        <div class="tabs">
+            <!-- Contador (activo morado) -->
+            <a href="../componentes/contador.html" class="tab activePurple">
+                <img src="../recursos/iconTag.png" alt="Contador" style="width: 14px; height: 14px;">
+                Contador
+            </a>
+
+            <!-- Palíndromo -->
+            <a href="../componentes/palindromo.html" class="tab">
+                <img src="../recursos/iconFormatAlignLeft.png" alt="Contador" style="width: 14px; height: 14px;">
+                Palíndromo
+            </a>
+
+            <!-- Validación Correo -->
+            <a href="../componentes/validar_correo.html" class="tab">
+                <img src="../recursos/iconMail.png" alt="Contador" style="width: 14px; height: 14px;">
+                Validación Correo
+            </a>
+
+            <!-- Búsqueda GitHub -->
+            <a href="../componentes/perfiles_git.html" class="tab">
+                <img src="../recursos/iconManageSearch.png" alt="Contador" style="width: 14px; height: 14px;">
+                Búsqueda GitHub
+            </a>
+
+            <!-- Tabla -->
+            <a href="../componentes/tabla.html" class="tab">
+                <svg class="tabIcon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 5h12M2 10h12M7 2v12" />
+                    <rect x="2" y="2" width="12" height="12" rx="2" />
+                </svg>
+                Tabla
+            </a>
+        </div>
+    </nav>
+
+    <div class="card">
+        <h1>Contador</h1>
+        <div style="text-align: center; font-size: 10rem; color: #666;">
+            <p><span id="contador">0</span></p>
+        </div>
+        <div style="display: flex; justify-content: center; gap: 10px;">
+
+            <button id="decrementar" onclick="decrementar()" class="btnIconRemove">
+                <img src="../recursos/iconRemove.png"
+                    style="display: flex; justify-content: center; align-items: center;">
+            </button>
+
+            <button id="resetear" onclick="resetear()" class="btnIconRestart">
+                <img src="../recursos/iconRestart.png"
+                    style="display: flex; justify-content: center; align-items: center;">
+            </button>
+
+            <button id="incrementar" onclick="incrementar()" class="btnIconAdd">
+                <img src="../recursos/iconAdd.png" style="display: flex; justify-content: center; align-items: center;">
+            </button>
+        </div>
+        <div>
+            <button class="limite" id="limitar" onclick="limitar()">Limitar a 10</button>
+        </div>
+    </div>
 
 </body>
 

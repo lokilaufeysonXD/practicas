@@ -5,21 +5,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/validar_correo.css">
-    <script src="../js/validar_coreo.js"></script>
+    <script src="../js/validar_coreo.js" defer></script>
     <title>Document</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="card">
-            <h1>Coloque su correo</h1>
-            <input type="correo" id="correo" placeholder="Ingrese su correo">
-            <button>enviar</button>
-            <br>
-            <br>
-            <input type="text" id="correo" placeholder="Ingrese su correo">
-            <button onclick="validarCorreo()">Validar</button>
-            <p id="resultado"></p>
+    <nav class="navbar">
+        <div class="tabs">
+            <!-- Contador  -->
+            <a href="../componentes/contador.html" class="tab">
+                <img src="../recursos/iconTag.png" alt="Contador" style="width: 14px; height: 14px;">
+                Contador
+            </a>
+
+            <!-- Palíndromo -->
+            <a href="../componentes/palindromo.html" class="tab">
+                <img src="../recursos/iconFormatAlignLeft.png" alt="Palíndromo" style="width: 14px; height: 14px;">
+                Palíndromo
+            </a>
+
+            <!-- Validación Correo (activo morado) -->
+            <a href="../componentes/validar_correo.html" class="tab activePurple">
+                <img src="../recursos/iconMail.png" alt="Contador" style="width: 14px; height: 14px;">
+                Validación Correo
+            </a>
+
+            <!-- Búsqueda GitHub -->
+            <a href="../componentes/perfiles_git.html" class="tab">
+                <img src="../recursos/iconManageSearch.png" alt="Contador" style="width: 14px; height: 14px;">
+                Búsqueda GitHub
+            </a>
+
+            <!-- Tabla -->
+            <a href="../componentes/tabla.html" class="tab">
+                <svg class="tabIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M2 5h12M2 10h12M7 2v12" />
+                    <rect x="2" y="2" width="12" height="12" rx="2" />
+                </svg>
+                Tabla
+            </a>
+        </div>
+    </nav>
+
+    <div class="card">
+        <h1>✉️ Validador de email</h1>
+        <div class="subtitle">Ingresa un correo electrónico para verificar su formato</div>
+
+        <div class="input-group">
+            <label for="emailInput">Correo electrónico</label>
+            <div class="input-wrapper">
+                <input type="email" id="emailInput" placeholder="ejemplo@dominio.com" autofocus>
+                <span id="iconValid" class="icon valid">✅</span>
+                <span id="iconInvalid" class="icon invalid">❌</span>
+            </div>
+            <div id="message" class="message"></div>
+        </div>
+
+        <button id="validateBtn">Validar</button>
+
+        <div class="examples">
+            <span class="example-badge valid-example" data-email="test@example.com">test@example.com</span>
+            <span class="example-badge valid-example"
+                data-email="user.name+tag@domain.co">user.name+tag@domain.co</span>
+            <span class="example-badge invalid-example" data-email="correo@dominio">correo@dominio</span>
+            <span class="example-badge invalid-example" data-email="sin arroba.com">sin arroba.com</span>
         </div>
     </div>
 </body>

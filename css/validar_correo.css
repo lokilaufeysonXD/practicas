@@ -1,0 +1,249 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* /////////////////////// navbar /////////////////////////////// */
+
+.navbar {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: 960px;
+    background: #1c1d2e;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.navbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* ── contenedores tabs ── */
+.tabs {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0 auto;
+}
+
+/* ── Tab base ── */
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+    border: none;
+    background: transparent;
+    text-decoration: none;
+}
+
+.tab:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Tab activo: morado ── */
+.tab.activePurple {
+    background: #6c5ce7;
+    color: #fff;
+}
+
+
+/* ── Iconos SVG inline ── */
+.tabIcon {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    max-width: 16px;
+    opacity: 0.9;
+    flex-shrink: 0;
+}
+
+
+/* /////////////////////// navbar /////////////////////////////// */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #3a7bd5, #3a6073);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    padding: 40px 30px;
+    max-width: 500px;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #34495e;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+input[type="email"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background: #fafafa;
+}
+
+input[type="email"]:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    background: white;
+}
+
+/* Estilos para validación */
+input.valid {
+    border-color: #2ecc71;
+    background: #f0fff4;
+}
+
+input.invalid {
+    border-color: #e74c3c;
+    background: #fff5f5;
+}
+
+.icon {
+    position: absolute;
+    right: 15px;
+    font-size: 1.3rem;
+    display: none;
+}
+
+.icon.valid {
+    color: #2ecc71;
+    display: block;
+}
+
+.icon.invalid {
+    color: #e74c3c;
+    display: block;
+}
+
+.message {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.message.error {
+    color: #e74c3c;
+}
+
+.message.success {
+    color: #2ecc71;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #2980b9;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.examples {
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.example-badge {
+    background: #ecf0f1;
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+    border: 1px solid #bdc3c7;
+}
+
+.example-badge:hover {
+    background: #d5dbdb;
+}
+
+.example-badge.valid-example {
+    border-left: 4px solid #2ecc71;
+}
+
+.example-badge.invalid-example {
+    border-left: 4px solid #e74c3c;
+}

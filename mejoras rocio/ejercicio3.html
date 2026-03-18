@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador de correo electrónico</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #3a7bd5, #3a6073);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            padding: 40px 30px;
+            max-width: 500px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: #fafafa;
+        }
+
+        input[type="email"]:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+            background: white;
+        }
+
+        /* Estilos para validación */
+        input.valid {
+            border-color: #2ecc71;
+            background: #f0fff4;
+        }
+
+        input.invalid {
+            border-color: #e74c3c;
+            background: #fff5f5;
+        }
+
+        .icon {
+            position: absolute;
+            right: 15px;
+            font-size: 1.3rem;
+            display: none;
+        }
+
+        .icon.valid {
+            color: #2ecc71;
+            display: block;
+        }
+
+        .icon.invalid {
+            color: #e74c3c;
+            display: block;
+        }
+
+        .message {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            min-height: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .message.error {
+            color: #e74c3c;
+        }
+
+        .message.success {
+            color: #2ecc71;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .examples {
+            margin-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .example-badge {
+            background: #ecf0f1;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+            border: 1px solid #bdc3c7;
+        }
+
+        .example-badge:hover {
+            background: #d5dbdb;
+        }
+
+        .example-badge.valid-example {
+            border-left: 4px solid #2ecc71;
+        }
+
+        .example-badge.invalid-example {
+            border-left: 4px solid #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>✉️ Validador de email</h1>
+        <div class="subtitle">Ingresa un correo electrónico para verificar su formato</div>
+
+        <div class="input-group">
+            <label for="emailInput">Correo electrónico</label>
+            <div class="input-wrapper">
+                <input type="email" id="emailInput" placeholder="ejemplo@dominio.com" autofocus>
+                <span id="iconValid" class="icon valid">✅</span>
+                <span id="iconInvalid" class="icon invalid">❌</span>
+            </div>
+            <div id="message" class="message"></div>
+        </div>
+
+        <button id="validateBtn">Validar</button>
+
+        <div class="examples">
+            <span class="example-badge valid-example" data-email="test@example.com">test@example.com</span>
+            <span class="example-badge valid-example" data-email="user.name+tag@domain.co">user.name+tag@domain.co</span>
+            <span class="example-badge invalid-example" data-email="correo@dominio">correo@dominio</span>
+            <span class="example-badge invalid-example" data-email="sin arroba.com">sin arroba.com</span>
+        </div>
+    </div>
+
+    <script>
+        // Expresión regular para validar email (sencilla pero efectiva)
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Elementos del DOM
+        const emailInput = document.getElementById('emailInput');
+        const iconValid = document.getElementById('iconValid');
+        const iconInvalid = document.getElementById('iconInvalid');
+        const messageDiv = document.getElementById('message');
+        const validateBtn = document.getElementById('validateBtn');
+        const exampleBadges = document.querySelectorAll('.example-badge');
+
+        // Función para validar email y actualizar la interfaz
+        function validateEmail(email) {
+            const isValid = emailRegex.test(email);
+            const trimmed = email.trim();
+
+            // Actualizar clases del input
+            if (trimmed === '') {
+                emailInput.classList.remove('valid', 'invalid');
+                iconValid.style.display = 'none';
+                iconInvalid.style.display = 'none';
+                messageDiv.className = 'message';
+                messageDiv.textContent = '';
+                return;
+            }
+
+            if (isValid) {
+                emailInput.classList.add('valid');
+                emailInput.classList.remove('invalid');
+                iconValid.style.display = 'block';
+                iconInvalid.style.display = 'none';
+                messageDiv.className = 'message success';
+                messageDiv.textContent = '✅ Formato válido';
+            } else {
+                emailInput.classList.add('invalid');
+                emailInput.classList.remove('valid');
+                iconValid.style.display = 'none';
+                iconInvalid.style.display = 'block';
+                messageDiv.className = 'message error';
+                messageDiv.textContent = '❌ Formato inválido. Debe incluir @ y dominio (ej: usuario@dominio.com)';
+            }
+        }
+
+        // Validar mientras el usuario escribe (retroalimentación inmediata)
+        emailInput.addEventListener('input', function() {
+            validateEmail(this.value);
+        });
+
+        // También al perder el foco (por si acaso)
+        emailInput.addEventListener('blur', function() {
+            validateEmail(this.value);
+        });
+
+        // Botón validar (por si quieren forzar, aunque ya hay feedback)
+        validateBtn.addEventListener('click', function() {
+            validateEmail(emailInput.value);
+        });
+
+        // Permitir Enter en el input
+        emailInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                validateEmail(this.value);
+            }
+        });
+
+        // Ejemplos interactivos
+        exampleBadges.forEach(badge => {
+            badge.addEventListener('click', function() {
+                const email = this.getAttribute('data-email');
+                emailInput.value = email;
+                validateEmail(email);
+                // Opcional: dar foco al input
+                emailInput.focus();
+            });
+        });
+
+        // Validar al cargar (con campo vacío)
+        validateEmail('');
+    </script>
+</body>
+</html>
+
+

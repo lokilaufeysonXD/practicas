@@ -1,15 +1,20 @@
 <?php
 $host = "localhost";
 $user = "root";
-$password = "";
+$password = "root";
 $database = "tarea_rocio";
 
-// Conexión
+//Conexión
 $conn = mysqli_connect($host, $user, $password, $database);
 
-// Verificar conexión
+//Verificar conexión
 if (!$conn) {
     die("Error de conexión: " . mysqli_connect_error());
 }
 
-echo "Conexión exitosa";
+// echo "Conexión exitosa";
+
+
+// echo "Hola mundo";
+// phpinfo();
+?>

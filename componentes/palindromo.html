@@ -5,19 +5,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/palindromo.css">
-    <script src="../js/palindromo.js"></script>
+    <script src="../js/palindromo.js" defer></script>
     <title>Palindromo</title>
 </head>
 
 <body>
-    <h1>Palindromo</h1>
-    <input type="text" id="palindromo" placeholder="Ingresa una palabra o frase">
-    <button onclick="esPalindromo()">Verificar</button>
-    <p class="resultado_color" id="resultado"></p>
+    <nav class="navbar">
+        <div class="tabs">
+            <!-- Contador  -->
+            <a href="../componentes/contador.html" class="tab">
+                <img src="../recursos/iconTag.png" alt="Contador" style="width: 14px; height: 14px;">
+                Contador
+            </a>
 
-    <div class="mensaje_flotante" id="caja-flotante" style="display: none;">
-        <p>Resultado:</p>
-        <p id="resultado-flotante"></p>
+            <!-- Palíndromo (activo morado)-->
+            <a href="../componentes/palindromo.html" class="tab activePurple">
+                <img src="../recursos/iconFormatAlignLeft.png" alt="Contador" style="width: 14px; height: 14px;">
+                Palíndromo
+            </a>
+
+            <!-- Validación Correo -->
+            <a href="../componentes/validar_correo.html" class="tab">
+                <img src="../recursos/iconMail.png" alt="Contador" style="width: 14px; height: 14px;">
+                Validación Correo
+            </a>
+
+            <!-- Búsqueda GitHub -->
+            <a href="../componentes/perfiles_git.html" class="tab">
+                <img src="../recursos/iconManageSearch.png" alt="Contador" style="width: 14px; height: 14px;">
+                Búsqueda GitHub
+            </a>
+
+            <!-- Tabla -->
+            <a href="../componentes/tabla.html" class="tab">
+                <svg class="tabIcon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 5h12M2 10h12M7 2v12" />
+                    <rect x="2" y="2" width="12" height="12" rx="2" />
+                </svg>
+                Tabla
+            </a>
+        </div>
+    </nav>
+
+    <div class="card">
+        <h1> ¿Es un palíndromo?</h1>
+        <div class="subtitle">Ingresa una palabra o frase y descúbrelo</div>
+
+        <div class="input-group">
+            <label for="textInput">Texto a evaluar</label>
+            <input type="text" id="textInput" placeholder="Ej: anita lava la tina" autofocus>
+        </div>
+
+        <button id="checkBtn">Comprobar</button>
+
+        <div id="resultCard" class="result-card">
+            <div id="resultText" class="result-text"></div>
+            <div id="resultMessage" class="result-message">Esperando tu texto...</div>
+        </div>
+
+        <div class="example">
+            💡 Prueba con: <span id="example1">Anita lava la tina</span> | <span id="example2">Hola mundo</span>
+        </div>
     </div>
 </body>
 

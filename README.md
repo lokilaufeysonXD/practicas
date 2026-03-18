@@ -6,14 +6,10 @@
     - Muestra la cantidad de clics para las acciones de incremento y disminución, restableciéndose después de alcanzar los 10 clics.
 
 2- Crear una aplicación web sencilla donde los usuarios podrán introducir una palabra o frase para comprobar si es un palíndromo. La aplicación incluirá:
-    ********************- Un diseño limpio y responsivo.******************
+    - Un diseño limpio y responsivo.
     - Una entrada de texto para que el usuario ingrese texto.
     - Un botón para activar la comprobación del palíndromo.
     - Una sección de resultados que muestra si la entrada es un palíndromo.
-
-
-    ////////////////////////////// hacer /////////////////////////////////////////
-
 
 3- Construir una aplicación que permita a los usuarios
     - Introducir una dirección de correo electrónico en un campo de entrada.
@@ -32,3 +28,6 @@
     - El sistema de gestión de bases de datos de empleados es la recopilación de datos de los empleados, como nombres, nombre y apellido, correo electrónico, números de contacto, salario y fecha de nacimiento, etc.
     - Proporciona una forma sencilla de acceder y administrar la lista de empleados en un solo lugar.
     - Se puede agregar un nuevo empleado con detalles válidos junto con una fuente de imagen opcional proporcionada en el formulario de adición, y también se puede eliminar de la base de datos.
+
+    ////////////////////////////// hacer /////////////////////////////////////////
+
