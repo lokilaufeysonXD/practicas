@@ -1,0 +1,40 @@
+CREATE DATABASE IF NOT EXISTS tarea_rocio
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+ 
+USE tarea_rocio;
+ 
+CREATE TABLE IF NOT EXISTS users (
+    id            INT AUTO_INCREMENT PRIMARY KEY,
+    nombre        VARCHAR(100)  NOT NULL,
+    edad          INT           NOT NULL DEFAULT 0,
+    ciudad        VARCHAR(100)  NOT NULL DEFAULT '',
+    departamento  VARCHAR(100)  NOT NULL DEFAULT '',
+    salario       DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    estado        ENUM('Activo','Inactivo','Suspendido') NOT NULL DEFAULT 'Activo',
+    created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
+-- Datos de ejemplo
+INSERT INTO users (nombre, edad, ciudad, departamento, salario, estado) VALUES
+('Ana García',      28, 'Madrid',     'Marketing',    2800.00, 'Activo'),
+('Carlos López',    35, 'Barcelona',  'Desarrollo',   3500.00, 'Activo'),
+('María Rodríguez', 42, 'Sevilla',    'RRHH',         2200.00, 'Inactivo'),
+('Pedro Martínez',  31, 'Valencia',   'Ventas',       2600.00, 'Activo'),
+('Laura Sánchez',   26, 'Bilbao',     'Diseño',       2400.00, 'Activo'),
+('Diego Fernández', 38, 'Zaragoza',   'Finanzas',     3100.00, 'Suspendido'),
+('Sofía Jiménez',   29, 'Málaga',     'Desarrollo',   3200.00, 'Activo'),
+('Andrés Torres',   45, 'Alicante',   'Dirección',    4500.00, 'Activo');
+
+ALTER TABLE users
+  ADD COLUMN email    VARCHAR(150) NOT NULL DEFAULT '',
+  ADD COLUMN telefono VARCHAR(20)  NOT NULL DEFAULT '';
+
+ALTER TABLE users 
+ADD COLUMN fecha_nacimiento DATE NULL DEFAULT NULL ;
+
+
+
+
+lo tienes que hacer paso a paso 
+primero del 1 al 3 despues el 5 despues del 7 al 16  despues del 18 al 27 despues del 29 al 31 despues del 33 al 34 
